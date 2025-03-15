@@ -18,6 +18,12 @@ func execute_input(input string) error {
 	//  remove newline char
 	input = strings.TrimSuffix(input, "\n")
 
+	// split on spaces to separate command and arguments
+	args := strings.Split(input, " ")
+
+	// pass arguments
+	cmd := exec.Command(args[0], args[1:]...)
+
 	// prepare command
 	cmd := exec.Command(input)
 
