@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 	"os"
 	"os/exec"
@@ -26,9 +25,6 @@ func main() {
 	}
 }
 
-// ErrNoPath is returned when 'cd' was called without a second argument.
-var ErrNoPath = errors.New("path required")
-
 func execute_input(input string) error {
 	// Remove the newline character.
 	input = strings.TrimSuffix(input, "\n")
@@ -39,9 +35,13 @@ func execute_input(input string) error {
 	// Check for built-in commands.
 	switch args[0] {
 	case "cd":
-		// 'cd' to home with empty path not yet supported.
+		// Support 'cd' to home directory when no path is provided
 		if len(args) < 2 {
-			return ErrNoPath
+			homeDir, err := os.UserHomeDir()
+			if err != nil {
+				return err
+			}
+			return os.Chdir(homeDir)
 		}
 		// Change the directory and return the error.
 		return os.Chdir(args[1])
