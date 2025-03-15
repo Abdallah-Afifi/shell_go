@@ -8,3 +8,18 @@ func main() {
 		}
 	}
 }
+
+func execute_input(input string) error {
+	//  remove newline char
+	input = strings.TrimSuffix(input, "\n")
+
+	// prepare command
+	cmd := exec.Command(input)
+
+	// set output device
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	// execute and return error
+	return cmd.Run()
+}
