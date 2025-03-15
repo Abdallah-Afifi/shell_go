@@ -7,6 +7,10 @@ func main() {
 		if err != nil {
 			fmt.Println(os.Stderr, err)
 		}
+		// handle execution
+		if err = execute_input(input); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+		}
 	}
 }
 
