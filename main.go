@@ -1,6 +1,7 @@
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 	for {
+		fmt.Print(">")
 		// read keyboard input
 		input, err := reader.ReadString('\n')
 		if err != nil {
@@ -23,3 +24,4 @@ func execute_input(input string) error {
 	// execute and return error
 	return cmd.Run()
 }
+
